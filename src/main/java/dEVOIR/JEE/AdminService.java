@@ -1,45 +1,77 @@
 package dEVOIR.JEE;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
-import jakarta.websocket.server.PathParam;
-@Path("/admin")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 public class AdminService {
+	public  Map<String,Service> services = Database.getServices();
 	
-	@GET
-    @Path("/rec")
-    public  Map<String, Admin> getValue() {
-		 return Database.admins ;}
-	
-	 public static String changePassword(String login,String password ,String newPassword) {
-	        Admin admin = Database.admins.get(login);
-	        if (admin == null) {
-	        	return "Cette utilisateur n'existe pas !!";
-	        	} else if (!password.equals(admin.getPassword())) {
-	        	return "Mot de passe incorrecte !!";
-	        	} else {
-	        	admin.setPassword(newPassword);
-	        	Database.admins.put(admin.getLogin(), admin);
-	        	return "Mot de passe est modifié avec succès";
-	        	}
-	    }
+	public  Map<Integer,compte> comptes = Database.getComptes();
 	
 	
-	@PUT
-	@Path("/ChangePassword/{login}/{Password}/{NewPassword}")
-	public String ChangePassword(@PathParam("login") String login,
-	@PathParam("password") String password,
-	@PathParam("newpassword") String newpassword) {
-	return changePassword(login, password, newpassword);
+	
+public  String UpdatePass(String password) {
+		
+		Admin.setPassword(password);
+		return "password change it";
+	
+	
+}
+
+
+
+public  String AddService(Service s ) {
+	
+	services.put(s.getNomService(), s);
+	return s.getIdService() +" was add succefuly";
+}
+
+
+
+
+
+public  String addCompte(String nomService,  int nCompte,  double montant) {
+	
+	Service service = services.get(nomService);
+	if (service != null) {
+		comptes.put(nCompte, new compte(nCompte, montant, service));
+		return "ajouter avec succés";
+	} else {
+		return "service not found";
 	}
+}
+
+
+public  Service findService(String nomService) {
 	
+	Service service = services.get(nomService);
+	if (service != null) {
+		return service ;
+	} else {
+		return null;
+	}
+}
+public  compte findCompte(int nCompte) {
+	
+	compte cmpt = comptes.get(nCompte);
+	if (cmpt != null) {
+		return cmpt ;
+	} else {
+		return null;
+	}
+}
+
+
+//public List<Service> allServices() {
+//return new ArrayList<Service>(services.values());
+//}
+
+public List<compte> allComptes() {
+	
+return new ArrayList<compte>(comptes.values());
+}
+
+
+
 }
