@@ -9,5 +9,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/home/dedahi/Bureau/eclipse-workspace/ProjetDevoirJEE/src/main/webapp/WEB-INF/lib/jakarta.ws.rs-api-3.0.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -4,19 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Database {
-	static Map<String, Admin> admins = new HashMap<>();
-
-	public static Map<String, Admin> getAdmins() {
-		return admins;
-	}
-
-	public static void setAdmins(Map<String, Admin> admins) {
-		Database.admins = admins;
-	}
-	 public static void addAdmin(Admin admin) {
-	        admins.put(Admin.getLogin(), admin);
-	    }
 	
+private static Map<String , Service> Services = new HashMap<>();
+
+public static Map<String , Service> getServices() {
+	return Services;
+}
+
+ 
+
+
+
+private static Map<Integer , compte> Comptes = new HashMap<>();
 	
+public static Map<Integer , compte> getComptes() {
+	return Comptes;
+}
 
 }

@@ -1,6 +1,6 @@
 package dEVOIR.JEE;
 
-import com.owlike.genson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Admin {
 	@JsonProperty
@@ -15,33 +15,25 @@ public class Admin {
 	
 
 	
-	public Admin(String login, String password) {
-		this.login = login;
-		this.password = password;
-	}
+
 	
 	
 	
-
-
-
 	public static String getLogin() {
 		return login;
 	}
 	public void setLogin(String login) {
-		this.login = login;
+		Admin.login = login;
 	}
 	public static String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public static void  setPassword(String password) {
+		Admin.password = password;
 	}
-	 public static void main(String[] args) {
-	        Database.addAdmin(new Admin());
-	    }
+	
 	 public static boolean checkLogin(String login, String password) {
-	        Admin admin = Database.admins.get(login);
+	       
 	        if( login.equals(getLogin()) &&  password.equals(getPassword())){
 				
 				return true;
@@ -51,5 +43,14 @@ public class Admin {
 			}
 	    }
 	 
-	
+	 public static String CheckLogin(String login, String password) {
+	       
+	        if( login.equals(getLogin()) &&  password.equals(getPassword())){
+				
+				return "bienvenue" ;
+			}
+			else{
+				 return "mot de passe or username incorrect "+login;
+			}
+	    }
 }
