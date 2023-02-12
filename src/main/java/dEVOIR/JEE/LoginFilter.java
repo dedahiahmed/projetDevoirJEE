@@ -1,15 +1,15 @@
 package dEVOIR.JEE;
 
+
+
 import jakarta.servlet.Filter;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpFilter;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,12 +27,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		 HttpServletRequest httpRequest = (HttpServletRequest) request;
-	        HttpServletResponse httpResponse = (HttpServletResponse) response;
-	        HttpSession session = httpRequest.getSession(false);
-	        
-	        
-	        
+
 	       
 	        response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
@@ -53,20 +48,22 @@ public class LoginFilter extends HttpFilter implements Filter {
 				
 			}
 			else {
-				out.println("<HTML>");
-				out.println("<HEAD><TITLE>welcome</TITLE></HEAD>");
-				out.println("<BODY>");
-				out.println("<H1>welcome </H1>" + Admin.getLogin());
-				out.println("</BODY></HTML>");
-				out.close();
+				new Accueil();
+				if(Database.Clients.containsKey(login)==true) {
+				if(Database.Clients.get(login).getPassword().equals(password)) {
+					if(Database.responsables.containsKey(login)==true && Database.responsables.get(login).getPassword().equals(password)) {
+						
+					
+					new Accueil();
+					Accueil.mapUsers.clear();
+					
+				}	
+				
+				}
 				
 			}
-			
-			  if (session == null || session.getAttribute("user") == null) {
-		            httpResponse.sendRedirect("/login");
-		            session.invalidate();
-		            return;
-		        }
+			}
+			 
 
 		
 			chain.doFilter(request, response);

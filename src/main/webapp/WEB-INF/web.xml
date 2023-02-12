@@ -17,14 +17,23 @@
 <url-pattern>/ws-rest/*</url-pattern>
 </servlet-mapping>
 
+<servlet>
+  <servlet-name>serveltprincipal</servlet-name>
+  <servlet-class>dEVOIR.JEE.Accueil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+   <servlet-name>serveltprincipal</servlet-name>
+   <url-pattern>/principal</url-pattern>
+  </servlet-mapping>
+
 <filter>
-    <display-name>LoginFilter</display-name>
+    <display-name>serveltprincipal</display-name>
     <filter-name>LoginFilter</filter-name>
     <filter-class>dEVOIR.JEE.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
-    <url-pattern>/LoginFilter</url-pattern>
+    <url-pattern>/principal</url-pattern>
   </filter-mapping>
   
 </web-app>

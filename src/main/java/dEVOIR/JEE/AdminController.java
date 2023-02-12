@@ -2,6 +2,8 @@ package dEVOIR.JEE;
 
 
 
+
+
 import java.util.List;
 import java.util.Map;
 
@@ -45,14 +47,18 @@ public class AdminController {
 	public String addservice(Service s){
 	return a.AddService(s);
 	}
-
-
+	@PUT
+	@Path("add/client")
+	public String addClient(@QueryParam("nom") String nom,@QueryParam("tel") int telephone
+			,@QueryParam("pass") String pass , @QueryParam("login") String login) {
+		return a.addClient(nom, telephone, pass,login);
+	}
 		
 	@PUT
 	@Path("/compte")
 	public String addCompte(@QueryParam("nomService") String nomService, 
-			@QueryParam("Ncompte") int Ncompte, @QueryParam("montant") double montant) {
-		return a.addCompte(nomService, Ncompte, montant);
+			@QueryParam("Ncompte") int Ncompte, @QueryParam("tel") int tel,@QueryParam("montant") double montant) {
+		return a.addCompte(nomService, Ncompte, montant , tel);
 		
 	}
 
@@ -94,6 +100,11 @@ public class AdminController {
 	return a.crediter(NCompte,crediter);
 	}
 	
+	@PUT
+	@Path("/resp")
+	public String AddRes( Responsable r) {
+		return a.AddResp(r);
+	}
 	
 	
 }

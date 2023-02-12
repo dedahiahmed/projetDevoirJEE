@@ -1,14 +1,23 @@
 package dEVOIR.JEE;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class compte {
-	@JsonProperty
+	
 	private int Ncompte;
-	@JsonProperty
+	
 	private double montant;
-	@JsonProperty
+	
 	private Service service;
+	
+	
+	private Client client;
+
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
 	
 	
 	public int getNCompte() {
@@ -30,11 +39,12 @@ public class compte {
 		this.service = service;
 	}
 	
-	public compte(int Ncompte, double montant, Service service) {
+	public compte(int Ncompte, double montant, Service service , Client client) {
 		super();
 		this.Ncompte = Ncompte;
 		this.montant = montant;
 		this.service = service;
+		this.client = client;
 	}
  
 

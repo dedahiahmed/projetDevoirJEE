@@ -1,13 +1,22 @@
  package dEVOIR.JEE;
+ 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class AdminService {
-	public  Map<String,Service> services = Database.getServices();
+	private  Map<String,Service> services = Database.getServices();
 	
-	public   Map<Integer,compte> comptes = Database.getComptes();
+	private   Map<Integer,compte> comptes = Database.getComptes();
+	
+	private  Map<Integer , Client> Clients = Database.getClients();
+	
+	private  Map<String , Responsable> responsables = Database.getResponsables();
+	
+	Client c =new Client();
+	Responsable r = new Responsable();
+	
 	
 	
 	
@@ -24,21 +33,30 @@ public  String UpdatePass(String password) {
 public  String AddService(Service s ) {
 	
 	services.put(s.getNomService(), s);
-	return s.getIdService() +" was add succefuly";
+	return s.getNomService() +" was add succefuly";
 }
 
-
+public String addClient(String nom ,int telephone, String password,String login) {
+	   c = Clients.get(telephone);
+	  if (!login.equals(nom) || !login.equals(String.valueOf(telephone))) {
+	    return "erreur";
+	  } else {
+	    Clients.put(telephone, new Client( ));
+	    return nom + " was added successfully";
+	  }
+	}
  
 
 
-public  String addCompte(String nomService,  int Ncompte,  double montant) {
+public  String addCompte(String nomService,  int Ncompte,  double montant , int Tel) {
 	
 	Service service = services.get(nomService);
-	if (service != null) {
-		comptes.put(Ncompte, new compte(Ncompte, montant, service));
+	Client client = Clients.get(Tel);
+	if (service != null && client!=null) {
+		comptes.put(Ncompte, new compte(Ncompte, montant, service ,  client));
 		return "ajouter avec succés";
 	} else {
-		return "service not found";
+		return "service or compte not found";
 	}
 }
 
@@ -80,4 +98,12 @@ public  String crediter(int nCompte, double montant){
 	+ montant;
 	}
 
+
+
+public String AddResp(Responsable r) {
+	
+	responsables.put(r.getLogin(), r);
+	
+	return r.getLogin() + " was add succefuly";
+}
 }

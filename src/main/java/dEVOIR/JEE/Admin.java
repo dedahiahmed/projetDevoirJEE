@@ -1,11 +1,10 @@
 package dEVOIR.JEE;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class Admin {
-	@JsonProperty
+	
 	private static  String login = "admin";
-	@JsonProperty
 	private static  String password ="admin";
 	
 	
