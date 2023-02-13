@@ -2,12 +2,11 @@ package dEVOIR.JEE;
 
 public class compte {
 	
-	private int Ncompte;
+	private static int Ncompte;
 	
-	private double montant;
+	private static double montant;
 	
 	private Service service;
-	
 	
 	private Client client;
 
@@ -20,17 +19,17 @@ public class compte {
 
 	
 	
-	public int getNCompte() {
+	public static int getNCompte() {
 		return Ncompte;
 	}
 	public void setNCompte(int Ncompte) {
-		this.Ncompte = Ncompte;
+		compte.Ncompte = Ncompte;
 	}
-	public double getMontant() {
+	public static double getMontant() {
 		return montant;
 	}
-	public void setMontant(double montant) {
-		this.montant = montant;
+	public static void setMontant(double montant) {
+		compte.montant = montant;
 	}
 	public Service getService() {
 		return service;
@@ -41,8 +40,8 @@ public class compte {
 	
 	public compte(int Ncompte, double montant, Service service , Client client) {
 		super();
-		this.Ncompte = Ncompte;
-		this.montant = montant;
+		compte.Ncompte = Ncompte;
+		compte.montant = montant;
 		this.service = service;
 		this.client = client;
 	}

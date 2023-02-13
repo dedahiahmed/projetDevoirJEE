@@ -48,26 +48,22 @@ public class LoginFilter extends HttpFilter implements Filter {
 				
 			}
 			else {
-				new Accueil();
-				if(Database.Clients.containsKey(login)==true) {
-				if(Database.Clients.get(login).getPassword().equals(password)) {
-					if(Database.responsables.containsKey(login)==true && Database.responsables.get(login).getPassword().equals(password)) {
-						
+			
+					
 					
 					new Accueil();
-					Accueil.mapUsers.clear();
 					
 				}	
+			chain.doFilter(request, response);
 				
 				}
 				
-			}
-			}
+			
 			 
 
 		
-			chain.doFilter(request, response);
-	}
+			
+	
 
 	
 	public void init(FilterConfig fConfig) throws ServletException {

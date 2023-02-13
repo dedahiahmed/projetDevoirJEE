@@ -5,8 +5,8 @@ package dEVOIR.JEE;
 public class Client {
 	private String nom;
 	private int Telephone;
+	private static String login;
 	
-	private String login  ;
 
 	public String getNom() {
 		return nom;
@@ -18,7 +18,7 @@ public class Client {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	private String password;
+	private static String password;
 	
 	
 	
@@ -31,8 +31,8 @@ public class Client {
 public Client(String nom ,int telephone, String password,String login ) {
 		super();
 		this.Telephone = telephone;
-		this.login = login;
-		this.password = password;
+		Client.login = login;
+		Client.password = password;
 		this.nom=nom;
 		
 		
@@ -46,17 +46,17 @@ public Client(String nom ,int telephone, String password,String login ) {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String getLogin() {
+	public static String getLogin() {
 		return login;
 	}
 	public void setLogin(String login) {
-		this.login = login;
+		Client.login = login;
 	}
-	public String getPassword() {
+	public static String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		Client.password = password;
 	}
 	public int getTelephone() {
 		return Telephone;
@@ -65,5 +65,20 @@ public Client(String nom ,int telephone, String password,String login ) {
 		Telephone = telephone;
 	}
 	
+	public static String CheckLogin(String login, String password) {
+	       
+        if( login.equals(getLogin()) &&  password.equals(getPassword())){
+			
+			return "bienvenue" ;
+		}
+		else{
+			 return "mot de passe or username incorrect "+login;
+		}
+    }
+
+
+
+
+
 
 }

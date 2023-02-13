@@ -37,13 +37,15 @@ public  String AddService(Service s ) {
 }
 
 public String addClient(String nom ,int telephone, String password,String login) {
-	   c = Clients.get(telephone);
-	  if (!login.equals(nom) || !login.equals(String.valueOf(telephone))) {
-	    return "erreur";
-	  } else {
-	    Clients.put(telephone, new Client( ));
-	    return nom + " was added successfully";
-	  }
+	   Client c = Clients.get(telephone);
+	   if (c != null) {
+	      return "Error: This telephone number is already in use";
+	   }
+	   if (!login.equals(String.valueOf(telephone))) {
+	      return "Error: Login must be equal to  the telephone number";
+	   } 
+	   Clients.put(telephone, new Client(nom, telephone, password, login));
+	   return nom + " was added successfully";
 	}
  
 
@@ -56,7 +58,7 @@ public  String addCompte(String nomService,  int Ncompte,  double montant , int 
 		comptes.put(Ncompte, new compte(Ncompte, montant, service ,  client));
 		return "ajouter avec succés";
 	} else {
-		return "service or compte not found";
+		return "service or client not found";
 	}
 }
 
@@ -90,12 +92,22 @@ public List<compte> allComptes() {
 return new ArrayList<compte>(comptes.values());
 }
 
+public List<Client> allClients() {
+	
+return new ArrayList<Client>(Clients.values());
+}
+
 
 public  String crediter(int nCompte, double montant){
 	compte c = comptes.get(nCompte);
-		c.setMontant(c.getMontant()+montant);
-	return c.getNCompte()+ " a ete crédite d'un montant de "
-	+ montant;
+	if(c==null) {
+		return " compte not found";
+			
+	}
+	else {
+		compte.setMontant(compte.getMontant()+montant);
+	return compte.getNCompte()+ " a ete crédite d'un montant de "
+	+ montant;}
 	}
 
 
