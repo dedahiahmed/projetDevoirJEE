@@ -2,39 +2,43 @@ package dEVOIR.JEE;
 
 
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Responsable {
-	@JsonProperty
-	private String Login ;
-	@JsonProperty
-	private String password;
+	private String id ;
+	private String nom ;
+	Service service;
 	
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	
+	public Service getService() {
+		return service;
+	}
+	public void setService(Service service) {
+		this.service = service;
+	}
 	
-	
-	 public Responsable(String Login, String password) {
-	        this.Login = Login;
-	        this.password = password;
-	       
-	    }
-	public String getLogin() {
-		return Login;
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public Responsable(String id, String nom, Service service) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		
+		this.service = service;
 	}
 	public Responsable() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public void setLogin(String login) {
-		this.Login = login;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
+	
 }

@@ -1,46 +1,36 @@
 package dEVOIR.JEE;
 
-
-
-
-
 import java.util.List;
-import java.util.Map;
+
+
+
 
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
+
 import jakarta.ws.rs.PUT;     
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
+
 @Path("/admin")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AdminController {
 	
+	AdminService a = new AdminService();
 	public boolean isAdmin() {
-		 new Accueil();
-		if (Accueil.mapUsers.containsKey("admin") == true) {
+		
+		if (Accueil.mapUsers.containsKey("admin")==true) {
 			return true;
 		}
 		return false;
 	}
-	
-	AdminService a = new AdminService();
-	
-	@POST
-	@Path("/login")
-	public static String Login(@QueryParam("login") String login , @QueryParam("password") String password ) {
-		return Admin.CheckLogin(login,password);
-		
-	}
-	
-
-
+	//update password 
 	@PUT
 	@Path("/upd")
 	public String update(@QueryParam("password") String password  ) {
@@ -51,104 +41,177 @@ public class AdminController {
 			return "error user not found";
 		
 	}
+	
+	
+	//client services
+	
+	@PUT
+	@Consumes("Application/Json")
+	@Path("ajouterclient")
+	public String addClient(Client c) {
+		if( isAdmin()==true) {
+			return a.addClient(c);
+        }else
+        {
+        	return "error user not found";
+        }
+
+	
+	}
+
+	
+	@GET
+	@Path("all/client")
+	public List<Client> allClients() {
+		if( isAdmin()==true) 
+			return a.allClients();
+		else
+			return null ;
 		
+	}
+
+	@GET
+	@Path("/client")
+	public Client getClient(@QueryParam("id") String id) {
+		if( isAdmin()==true) 
+		return a.getClient(id);
+		else
+			return null;
+	}
+
+	
+	@DELETE
+	@Path("/delete")
+	public String deleteClient(@QueryParam("id") String id) {
+		if( isAdmin()==true) {
+			return a.deleteClient(id);
+        }else
+        {
+        	return "error user not found";
+        }
+		
+	}
+	
+	
+	//Service Services
 	
 	@PUT
 	@Path("add/service")
-	public String addservice(Service s){
-		if(isAdmin()==true) 
-	return a.AddService(s);
-		else
-			return "error user not found";
+	public String addservice(Service s) {
+        if( isAdmin()==true) {
+		return a.Addservice(s);
+        }else
+        {
+        	return "error user not found";
+        }
 	}
+	// compte Services
+	
 	@PUT
-	@Path("add/client")
-	public String addClient(@QueryParam("nom") String nom,@QueryParam("tel") int telephone
-			,@QueryParam("password") String pass , @QueryParam("login") String login) {
-		if(isAdmin()==true) 
-		return a.addClient(nom, telephone, pass,login);
-		else
-		return "error user not found";
-	}
+	 
+	@Path("/compte") 
+		 public String addCompte( @QueryParam("nomservice") String nomservice ,
+				 @QueryParam("NCompte") String NCompte,@QueryParam("montant") double montant
+				 ,@QueryParam("id") String idClient ) {
+		    if( isAdmin()==true) {
+			  return a.addCompte(nomservice, NCompte,montant,idClient);
+	      }else
+	      {
+	      	return "error user not found";
+	      }
+		}
+	
+	
+	  @GET
+		@Path("all/comptes")
+		public List<Compte> allComptes() {
+		  if( isAdmin()==true)
+			return a.allComptes();
+		  else return null;
+		}
+
+		@GET
+		@Path("/compte")
+		public Compte getCompt(@QueryParam("id") String NCompt) {
+			if( isAdmin()==true)
+			return a.getCompte(NCompt);
+			else return null;
+		}
 		
-	@PUT
-	@Path("/compte")
-	public String addCompte(@QueryParam("nomService") String nomService, 
-			@QueryParam("Ncompte") int Ncompte, @QueryParam("tel") int tel,@QueryParam("montant") double montant) {
-		if(isAdmin()==true)
-		return a.addCompte(nomService, Ncompte, montant , tel);
-		else
-			return "error user not found";
-	}
+		 @GET
+		  
+		  @Path("/credite") public String credit(@QueryParam("NCompte") String NCompte
+				  , @QueryParam("montant") double montant){
+			 if( isAdmin()==true)
+			  return a.crediter(NCompte, montant); 
+			 else 
+				 return null;
+			  }
+		 
+		 
+		 
+		 @GET 
+			@Path("/annule") 
+			 public String annuleTransfer(@QueryParam("id_c") String id_crediteur,
+					 @QueryParam("id_d") String id_debiteur, @QueryParam("montant") double montant){
+			 if( isAdmin()==true)
+				 return a.annule(id_debiteur, id_crediteur, montant); 
+			 else
+				 return "user not found";
+				 }  
+		 
+		 //Responsable Services 
+		 
+		 	@PUT
+			@Path("/responsable")
+			public String addResponsable(@QueryParam("id") String id, @QueryParam("nom") String nom, 
+					 @QueryParam("nomService") String nomService) {
+				if( isAdmin()==true) {
+					return a.addResponsable(id,nom,nomService);
+		        }else
+		        {
+		        	return "error user not found";
+		        }
 
+			
+			}
+		 	
+		 	@GET
+			@Path("all/resp")
+			public List<Responsable> allResponsables() {
+		 		if( isAdmin()==true) 
+					return a.allResponsable();
+					else
+			        
+			        	return null;
+			        
 
-	
-	@GET
-	@Path("all/service")
-	public List<Service>AllServices(){
-		if(isAdmin()==true)
-	return a.allServices();
-		else
-			return null;
-	}
+				
+			}
 
-	@GET
-	@Path("all/comptes")
-	public Map<Integer, compte> allComptes(){
-		if(isAdmin()==true)
-	return Database.getComptes();
-		else
-			return null;
-	}
-	
-	@GET
-	@Path("all/clients")
-	public Map<Integer, Client> allclient(){
-		if(isAdmin()==true)
-	return Database.getClients();
-		else
-			return null;
-	}
+			@GET
+			@Path("/resp")
+			public Client getresp(@QueryParam("id") String login) {
+				if( isAdmin()==true)
+				return a.getClient(login);
+				else
+			        
+		        	return null;
+			}
 
-	@POST
-	@Path("/findS")
-	
-	public  Service findservice(@QueryParam("nomService") String nomService) {
-		if(isAdmin()==true)
-		
-		return a.findService(nomService);
-		else
-			return null;
-	}
-	
-	@POST
-	@Path("/findC")
-	
-	public  compte findcompte(@QueryParam("Ncompte") int Ncompte) {
-		if(isAdmin()==true)
-		return a.findCompte(Ncompte);
-		else
-			return null;
-	}
-	
-	@PUT
-	@Path("/credité")
-	public String versement(@QueryParam("NCompte") int NCompte,
-			@QueryParam("montant") double crediter){
-		if(isAdmin()==true)
-	return a.crediter(NCompte,crediter);
-		else 
-			return "error user not found";
-	}
-	
-	@PUT
-	@Path("/resp")
-	public String AddRes( Responsable r) {
-		if(isAdmin()==true)
-		return a.AddResp(r);
-		else 
-			return "error user not found";
-	}
-	
+			
+			@DELETE
+			@Path("/deleteresp")
+			public String delResp(@QueryParam("id") String id) {
+				if( isAdmin()==true) 
+					return a.deleteResponsable(id) ;
+		        
+		        
+		        	return "error user not found";
+		        
+		 	
+
+			}
+
 	
 }

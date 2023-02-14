@@ -13,12 +13,13 @@ import jakarta.servlet.http.HttpFilter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 
 public class LoginFilter extends HttpFilter implements Filter {
        
 	 private boolean verify=false;
-   
+	 public static  HashMap<String,String> mapUsers = new  HashMap <String,String> ();
 	
 	
 
@@ -49,12 +50,11 @@ public class LoginFilter extends HttpFilter implements Filter {
 			}
 			else {
 			
-					
-					
-					new Accueil();
+				new Accueil();
+				chain.doFilter(request, response);
 					
 				}	
-			chain.doFilter(request, response);
+			
 				
 				}
 				

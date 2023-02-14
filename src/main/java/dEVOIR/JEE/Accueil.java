@@ -9,9 +9,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class Accueil extends HttpServlet{
-	
-	private static final long serialVersionUID = 1L;
+
+
+public class Accueil extends HttpServlet {
+
+private static final long serialVersionUID = 1L;
 	
 	public static HashMap<String,String> mapUsers = new  HashMap <String,String> (); 
 	
@@ -22,12 +24,11 @@ public void service(HttpServletRequest req,HttpServletResponse response) throws 
 		 PrintWriter out1 = response.getWriter ();  
 		  String login = req.getParameter("login");
 		 	mapUsers.put(login,login);
-		 	System.out.println(mapUsers);
+		 	
 		 
 		  
 	      out1.print ( "<br> bienvenue <br>"+login );
 	      out1.close();
 	
 }
-
 }

@@ -4,24 +4,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Service {
 	@JsonProperty
-	private int idService; 
+	private String idService;
 	@JsonProperty
 	private String nomService;
-	
-	
-	
-	public int getIdService() {
-		return idService;
-	}
-	public void setIdService(int idService) {
-		this.idService = idService;
-	}
 
-	public String getNomService() {
+	
+	  public String getidService() { 
+		  return idService;
+	  } 
+	  public void serIdService(String idService) { 
+		  this.idService = idService;
+	  }
+	 
+	public String getnomService() {
 		return nomService;
 	}
-	public void setNomService(String nomService) {
+	public void setnomService(String nomService) {
 		this.nomService = nomService;
+	
+
 	}
 
 }

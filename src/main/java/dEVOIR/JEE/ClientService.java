@@ -6,19 +6,50 @@ import java.util.Map;
 
 public class ClientService {
 	
-	public static   Map<Integer , compte> comptes = Database.getComptes();
-	public   Map<Integer , Client> Clients = Database.getClients();
-
-	public static String transfert(int Tel_debiteur, int Tel_crediteur, double montant){
-			compte debit = comptes.get(Tel_debiteur);
-			compte credit = comptes.get(Tel_crediteur);
-			if(compte.getMontant()< montant){
-			return "solde inssufisant";
-			}
-			compte.setMontant(montant+compte.getMontant());
-			compte.setMontant(compte.getMontant()-montant);
-			return montant+ "a ete transferer avec success";
-			}
+public static Map<String, Client> clients = Database.getClients(); 
+	
+	public static Map<String, Compte> comptes = Database.getComptes(); 
+	
+	
+	
+	 public String versement(String Ncompte, double montant){ 
+		  Compte c =  comptes.get(Ncompte);
+		  if(c !=null) {
+		  c.setMontant(c.getMontant()+montant);
+		  return c.getNCompte() + " was credited with an amount of " + montant;
+		  }
+		  else {
+			  return Ncompte + "not found";
+		  }
+	  }
+	 
+	 
+	 
+	 public String retrait(String numconte, double montant){
+		  Compte c = comptes.get(numconte);
+	  if(c.getMontant()<montant){
+		  return "solde inssufisant"; 
+		  }
+	  else {
+	  c.setMontant(c.getMontant()-montant);
+	  return " le compte de " + c.getClient().getNom() +  "a vis une operation de retrait avec un montant de "+montant;
+	  }
+	  }
+	 
+	 
+	 public String transfert(String id_debiteur, String id_crediteur, double montant){ 
+		  Compte debit = comptes.get(id_debiteur); 
+		  Compte credit = comptes.get(id_crediteur); 
+		 if(debit.getMontant()< montant){ 
+		   return "solde inssufisant"; 
+		  } 
+		 else {
+			  debit.setMontant(debit.getMontant()-montant);
+			  credit.setMontant(montant+credit.getMontant());
+			  return debit.getClient().getNom()+" vous avez transferer avec success";
+		 }
+	   }
+	 
 	
 	
 }

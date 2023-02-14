@@ -1,50 +1,62 @@
 package dEVOIR.JEE;
 
-public class compte {
-	
-	private static int Ncompte;
-	
-	private static double montant;
-	
-	private Service service;
-	
-	private Client client;
 
-	public Client getClient() {
-		return client;
-	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
 
+public class Compte {
 	
-	
-	public static int getNCompte() {
-		return Ncompte;
-	}
-	public void setNCompte(int Ncompte) {
-		compte.Ncompte = Ncompte;
-	}
-	public static double getMontant() {
-		return montant;
-	}
-	public static void setMontant(double montant) {
-		compte.montant = montant;
-	}
-	public Service getService() {
-		return service;
-	}
-	public void setService(Service service) {
-		this.service = service;
-	}
-	
-	public compte(int Ncompte, double montant, Service service , Client client) {
-		super();
-		compte.Ncompte = Ncompte;
-		compte.montant = montant;
-		this.service = service;
-		this.client = client;
-	}
- 
+			private String NCompte;
+			
+			private double montant;
+		
+			private Service service;
+			private Client client;
+			
+			
+			public Client getClient() {
+				return client;
+			}
+			public void setClient(Client client) {
+				this.client = client;
+			}
+			public String getNCompte() {
+			return NCompte;
+			}
+			public void setNCompte(String NCompte) {
+				this.NCompte = NCompte;
+				}
+			
+			
+			public double getMontant() {
+			return montant;
+			}
+			public void setMontant(double montant) {
+			this.montant = montant;
+			}
+			
+			  public Service getService() {
+				  return service; 
+				  } 
+			  public void setService(Service service) { 
+				  this.service = service; 
+				  }
+			  
+			  
+			public Compte() {
+				super();
+				// TODO Auto-generated constructor stub
+			}
+			public Compte(String nCompte, double montant, Service service, Client client) {
+				super();
+				NCompte = nCompte;
+				this.montant = montant;
+				this.service = service;
+				this.client = client;
+			}
+			 
+
+			
+			
+			 	
+			
 
 }
